@@ -19,6 +19,14 @@ extern "C" {
 #define RAT_TEXT_PACKET_ID 0xFFu
 #endif
 
+#ifndef RAT_CTRL_INIT_PACKET_ID
+#define RAT_CTRL_INIT_PACKET_ID 0x00u
+#endif
+
+#ifndef RAT_GEN_FINGERPRINT
+#define RAT_GEN_FINGERPRINT 0uLL
+#endif
+
 #ifndef RAT_RTT_UP_MAIN_SIZE
 #define RAT_RTT_UP_MAIN_SIZE 1024u
 #endif

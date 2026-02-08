@@ -51,3 +51,34 @@ powershell -ExecutionPolicy Bypass -File tools/openocd_rtt_server.ps1 -DisableDe
 ```
 rttd server --addr 127.0.0.1:19021 --log out.jsonl
 ```
+
+
+## J-Link RTT 模式
+
+与 OpenOCD RTT 相同，流程是：
+1) 先启动 J-Link RTT server
+2) 再由 `rttd` attach 到 RTT TCP 端口（默认 `127.0.0.1:19021`）
+
+Linux/macOS:
+
+```bash
+./tools/jlink_rtt_server.sh --device STM32F407ZG --if SWD --speed 4000 --rtt-port 19021
+```
+
+Windows:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/jlink_rtt_server.ps1 -Device STM32F407ZG -Interface SWD -Speed 4000 -RttTelnetPort 19021
+```
+
+Host 侧连接：
+
+```bash
+rttd server --addr 127.0.0.1:19021 --log out.jsonl
+```
+
+常见失败排查：
+- 目标板是否上电（VTref）
+- SWDIO/SWCLK/GND 连线
+- device 名是否与芯片匹配（如 `STM32F407ZG`）
+- 端口是否被占用

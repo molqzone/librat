@@ -1,0 +1,5 @@
+packets = []
+
+[meta]
+project = "stm32f4_rtt"
+fingerprint = "0xCBF29CE484222325"
