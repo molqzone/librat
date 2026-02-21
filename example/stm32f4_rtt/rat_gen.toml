@@ -1,5 +1,24 @@
-packets = []
-
 [meta]
 project = "stm32f4_rtt"
-fingerprint = "0xCBF29CE484222325"
+fingerprint = "0x3A85528C8BE768B0"
+
+[[packets]]
+id = 12
+signature_hash = "0x9EADC3CEA501D458"
+struct_name = "RatSample"
+type = "plot"
+packed = false
+byte_size = 8
+source = "Src/main.c"
+
+[[packets.fields]]
+name = "value"
+c_type = "int32_t"
+offset = 0
+size = 4
+
+[[packets.fields]]
+name = "tick_ms"
+c_type = "uint32_t"
+offset = 4
+size = 4

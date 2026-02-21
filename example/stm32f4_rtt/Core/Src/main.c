@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "rat.h"
+#include "rat_gen.h"
 
 /* USER CODE END Includes */
 
@@ -43,6 +44,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+// @rat, plot
 typedef struct
 {
   int32_t value;
@@ -125,7 +127,7 @@ int main(void)
         g_sample.value = -1000;
         g_step = -g_step;
       }
-      RAT_EMIT(0x01u, g_sample);
+      RAT_EMIT(RAT_ID_RATSAMPLE, g_sample);
     }
     /* USER CODE END WHILE */
 

@@ -1,0 +1,4 @@
+# Keep generated/build artifacts out of sync scanning.
+build/**
+Drivers/**
+.git/**

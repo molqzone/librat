@@ -2,8 +2,10 @@
 name = "stm32f4_rtt"
 scan_root = "Core"
 recursive = true
-extensions = [".h", ".c"]
-ignore_dirs = ["build", "Drivers", ".git"]
+extensions = [
+    ".h",
+    ".c",
+]
 
 [artifacts]
 elf = "build/Debug/stm32f4_rtt.elf"
@@ -18,18 +20,17 @@ header_name = "rat_gen.h"
 [rttd]
 text_id = 255
 
-[rttd.server]
-addr = "127.0.0.1:19021"
-reconnect = "1s"
-buf = 256
-reader_buf = 65536
+[rttd.source]
+auto_scan = true
+scan_timeout_ms = 300
+last_selected_addr = "127.0.0.1:19021"
 
-[rttd.server.backend]
+[rttd.source.backend]
 type = "none"
 auto_start = false
 startup_timeout_ms = 5000
 
-[rttd.server.backend.openocd]
+[rttd.source.backend.openocd]
 elf = "build/Debug/stm32f4_rtt.elf"
 symbol = "_SEGGER_RTT"
 interface = "interface/cmsis-dap.cfg"
@@ -39,25 +40,25 @@ speed = 8000
 polling = 1
 disable_debug_ports = true
 
-[rttd.server.backend.jlink]
+[rttd.source.backend.jlink]
 device = "STM32F407ZG"
 interface = "SWD"
 speed = 4000
 serial = ""
 ip = ""
-rtt_telnet_port = 19021
 
-[rttd.foxglove]
+[rttd.behavior]
+auto_sync_on_start = true
+auto_sync_on_reset = true
+sync_debounce_ms = 500
+reconnect = "1s"
+buf = 256
+reader_buf = 65536
+
+[rttd.outputs.jsonl]
+enabled = true
+path = ""
+
+[rttd.outputs.foxglove]
+enabled = false
 ws_addr = "127.0.0.1:8765"
-topic = "ratitude/packet"
-schema_name = "ratitude.Packet"
-quat_id = 16
-temp_id = 32
-marker_topic = "/visualization_marker"
-parent_frame = "world"
-frame_id = "base_link"
-image_path = "../../../demo.jpg"
-image_frame = "camera"
-image_format = "jpeg"
-log_topic = "/ratitude/log"
-log_name = "ratitude"
