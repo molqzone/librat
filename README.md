@@ -9,7 +9,7 @@ librat 仅使用 SEGGER RTT 控制块（符号名：`_SEGGER_RTT`），OpenOCD R
 协议握手（v0.2）：
 
 - `rat_init()` 会先发送 runtime schema 控制帧（`HELLO -> SCHEMA_CHUNK -> SCHEMA_COMMIT`，控制包 ID=0x00）
-- Host 侧 `rttd` 在 schema ready 前不会解码业务包
+- Host 侧 `ratd` 在 schema ready 前不会解码业务包
 - `librat` 本体不直接依赖 `rat_gen.h`；应用层通过覆写 `rat_schema_payload()` 提供 schema bytes/hash
 - schema hash 默认由 `librat` 对 schema bytes 做 FNV-1a 计算（应用可显式提供）
 
@@ -58,7 +58,7 @@ powershell -ExecutionPolicy Bypass -File tools/openocd_rtt_server.ps1 -DisableDe
 1) Host 侧读取（默认端口 19021）：
 
 ```
-rttd --config firmware/example/stm32f4_rtt/rat.toml
+ratd --config firmware/example/stm32f4_rtt/rat.toml
 ```
 
 ## J-Link RTT 模式
@@ -66,7 +66,7 @@ rttd --config firmware/example/stm32f4_rtt/rat.toml
 与 OpenOCD RTT 相同，流程是：
 
 1) 先启动 J-Link RTT server
-2) 再由 `rttd` attach 到 RTT TCP 端口（默认 `127.0.0.1:19021`）
+2) 再由 `ratd` attach 到 RTT TCP 端口（默认 `127.0.0.1:19021`）
 
 Linux/macOS:
 
@@ -83,7 +83,7 @@ powershell -ExecutionPolicy Bypass -File tools/jlink_rtt_server.ps1 -Device STM3
 Host 侧连接：
 
 ```bash
-rttd --config firmware/example/stm32f4_rtt/rat.toml
+ratd --config firmware/example/stm32f4_rtt/rat.toml
 ```
 
 常见失败排查：
