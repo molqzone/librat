@@ -66,6 +66,18 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+const uint8_t* rat_schema_payload(uint32_t* len, uint64_t* hash)
+{
+  if (len != NULL)
+  {
+    *len = (uint32_t)RAT_GEN_SCHEMA_LEN;
+  }
+  if (hash != NULL)
+  {
+    *hash = (uint64_t)RAT_GEN_SCHEMA_HASH;
+  }
+  return RAT_GEN_SCHEMA_BYTES;
+}
 
 /* USER CODE END 0 */
 

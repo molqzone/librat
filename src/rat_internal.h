@@ -39,22 +39,6 @@ extern "C" {
 #define RAT_CTRL_SCHEMA_VERSION 0x01u
 #endif
 
-#ifndef RAT_GEN_FINGERPRINT
-#define RAT_GEN_FINGERPRINT 0uLL
-#endif
-
-#ifndef RAT_GEN_SCHEMA_HASH
-#define RAT_GEN_SCHEMA_HASH 0uLL
-#endif
-
-#ifndef RAT_GEN_SCHEMA_LEN
-#define RAT_GEN_SCHEMA_LEN 0u
-#endif
-
-#ifndef RAT_GEN_SCHEMA_BYTES
-#define RAT_GEN_SCHEMA_BYTES ((const uint8_t*)0)
-#endif
-
 #ifndef RAT_SCHEMA_CHUNK_BYTES
 #define RAT_SCHEMA_CHUNK_BYTES 192u
 #endif

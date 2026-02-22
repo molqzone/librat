@@ -6,12 +6,13 @@
 #include <string.h>
 
 #include "rat.h"
-#if defined(__has_include)
-#if __has_include("rat_gen.h")
-#include "rat_gen.h"
-#endif
-#endif
 #include "rat_internal.h"
+
+#if defined(__GNUC__) || defined(__clang__)
+#define RAT_WEAK __attribute__((weak))
+#else
+#define RAT_WEAK
+#endif
 
 static void rat_write_u16_le(uint8_t* out, uint16_t value)
 {
@@ -51,17 +52,34 @@ static int rat_emit_control_payload(const uint8_t* payload, uint32_t len)
   return rat_emit(RAT_CTRL_INIT_PACKET_ID, payload, len, false);
 }
 
+RAT_WEAK const uint8_t* rat_schema_payload(uint32_t* len, uint64_t* hash)
+{
+  if (len != NULL)
+  {
+    *len = 0u;
+  }
+  if (hash != NULL)
+  {
+    *hash = 0u;
+  }
+  return NULL;
+}
+
 static void rat_emit_runtime_schema(void)
 {
-  const uint8_t* schema = RAT_GEN_SCHEMA_BYTES;
-  uint32_t schema_len = (uint32_t)RAT_GEN_SCHEMA_LEN;
+  uint32_t schema_len = 0u;
+  uint64_t schema_hash = 0u;
+  const uint8_t* schema = rat_schema_payload(&schema_len, &schema_hash);
 
   if (schema == NULL || schema_len == 0u)
   {
     return;
   }
 
-  uint64_t schema_hash = rat_fnv1a64(schema, schema_len);
+  if (schema_hash == 0u)
+  {
+    schema_hash = rat_fnv1a64(schema, schema_len);
+  }
 
   uint8_t hello[18];
   hello[0] = RAT_CTRL_SCHEMA_HELLO_OPCODE;

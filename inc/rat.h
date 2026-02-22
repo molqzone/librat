@@ -15,9 +15,22 @@ extern "C"
   /**
    * @brief Initialize the Ratitude library
    * Must be called early in `main()`.
-   * Initializes the control block, mounts buffers, and enables host discovery.
+   * Initializes the control block, mounts buffers, and sends runtime schema control
+   * frames when a schema provider is available.
    */
   void rat_init(void);
+
+  /**
+   * @brief Optional schema provider hook for runtime handshake.
+   *
+   * The default implementation in librat returns NULL and sends no schema.
+   * Applications can override this symbol and return generated schema bytes.
+   *
+   * @param[out] len  schema byte length
+   * @param[out] hash schema hash (FNV-1a64); set 0 to let librat compute
+   * @return pointer to schema bytes, or NULL when unavailable
+   */
+  const uint8_t* rat_schema_payload(uint32_t* len, uint64_t* hash);
 
   /**
    * @brief Send a binary packet

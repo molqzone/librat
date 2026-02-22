@@ -10,7 +10,8 @@ librat 仅使用 SEGGER RTT 控制块（符号名：`_SEGGER_RTT`），OpenOCD R
 
 - `rat_init()` 会先发送 runtime schema 控制帧（`HELLO -> SCHEMA_CHUNK -> SCHEMA_COMMIT`，控制包 ID=0x00）
 - Host 侧 `rttd` 在 schema ready 前不会解码业务包
-- schema hash 由固件对 `rat_gen.h` 内嵌 schema bytes 做 FNV-1a 计算
+- `librat` 本体不直接依赖 `rat_gen.h`；应用层通过覆写 `rat_schema_payload()` 提供 schema bytes/hash
+- schema hash 默认由 `librat` 对 schema bytes 做 FNV-1a 计算（应用可显式提供）
 
 通道映射（无锁 SPSC）：
 
