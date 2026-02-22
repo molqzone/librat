@@ -23,8 +23,40 @@ extern "C" {
 #define RAT_CTRL_INIT_PACKET_ID 0x00u
 #endif
 
+#ifndef RAT_CTRL_SCHEMA_HELLO_OPCODE
+#define RAT_CTRL_SCHEMA_HELLO_OPCODE 0x01u
+#endif
+
+#ifndef RAT_CTRL_SCHEMA_CHUNK_OPCODE
+#define RAT_CTRL_SCHEMA_CHUNK_OPCODE 0x02u
+#endif
+
+#ifndef RAT_CTRL_SCHEMA_COMMIT_OPCODE
+#define RAT_CTRL_SCHEMA_COMMIT_OPCODE 0x03u
+#endif
+
+#ifndef RAT_CTRL_SCHEMA_VERSION
+#define RAT_CTRL_SCHEMA_VERSION 0x01u
+#endif
+
 #ifndef RAT_GEN_FINGERPRINT
 #define RAT_GEN_FINGERPRINT 0uLL
+#endif
+
+#ifndef RAT_GEN_SCHEMA_HASH
+#define RAT_GEN_SCHEMA_HASH 0uLL
+#endif
+
+#ifndef RAT_GEN_SCHEMA_LEN
+#define RAT_GEN_SCHEMA_LEN 0u
+#endif
+
+#ifndef RAT_GEN_SCHEMA_BYTES
+#define RAT_GEN_SCHEMA_BYTES ((const uint8_t*)0)
+#endif
+
+#ifndef RAT_SCHEMA_CHUNK_BYTES
+#define RAT_SCHEMA_CHUNK_BYTES 192u
 #endif
 
 #ifndef RAT_RTT_UP_MAIN_SIZE

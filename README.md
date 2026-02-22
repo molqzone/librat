@@ -6,6 +6,12 @@ librat 是一个轻量级、嵌入式友好的 C/C++ 库。
 
 librat 仅使用 SEGGER RTT 控制块（符号名：`_SEGGER_RTT`），OpenOCD RTT 可直接读取 COBS 帧数据。
 
+协议握手（v0.2）：
+
+- `rat_init()` 会先发送 runtime schema 控制帧（`HELLO -> SCHEMA_CHUNK -> SCHEMA_COMMIT`，控制包 ID=0x00）
+- Host 侧 `rttd` 在 schema ready 前不会解码业务包
+- schema hash 由固件对 `rat_gen.h` 内嵌 schema bytes 做 FNV-1a 计算
+
 通道映射（无锁 SPSC）：
 
 - Up[0]：`RatMain`，仅主循环写入
