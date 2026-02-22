@@ -1,6 +1,6 @@
 [meta]
 project = "stm32f4_rtt"
-fingerprint = "0x3A85528C8BE768B0"
+schema_hash = "0x3A85528C8BE768B0"
 
 [[packets]]
 id = 12
